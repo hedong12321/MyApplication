@@ -7,4 +7,14 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="@string/button_name2" />
+
+    <Button android:id="@+id/lifecycle_normal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@string/lifecycle_normal" />
+
+    <Button android:id="@+id/lifecycle_dialog"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@string/lifecycle_dialog" />
 </LinearLayout>

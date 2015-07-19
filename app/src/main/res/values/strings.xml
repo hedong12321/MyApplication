@@ -9,4 +9,7 @@
     <string name="close_item_title">Close</string>
 
     <string name="button_name2">Button 2</string>
+
+    <string name="lifecycle_normal">This is a normal activity</string>
+    <string name="lifecycle_dialog">This is a dialog activity</string>
 </resources>

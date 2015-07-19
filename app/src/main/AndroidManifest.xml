@@ -16,7 +16,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SecondActivity"></activity>
+        <activity android:name=".SecondActivity" />
+        <activity android:name=".LifecycleNormalActivity" />
+        <activity android:name=".LifecycleDialogActivity" android:theme="@android:style/Theme.Dialog" />
     </application>
 
 </manifest>
