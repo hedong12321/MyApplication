@@ -1,12 +1,12 @@
 package com.example.donghe.uiwidget;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,6 +16,8 @@ import java.util.List;
 
 public class MainActivity extends Activity {
 
+    private Button edit_btn;
+
     private List<Fruit> fruitList = new ArrayList<Fruit>();
 
     @Override
@@ -23,6 +25,17 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
+        // 获取自定义title的编辑按钮，重新绑定点击事件和修改text
+        edit_btn = (Button)findViewById(R.id.title_edit);
+        edit_btn.setText("Chat");
+        edit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                startActivity(intent);
+            }
+        });
 
         initFruits(); // 初始化水果数据
         FruitAdapter adapter = new FruitAdapter(MainActivity.this, R.layout.fruit_item, fruitList);
