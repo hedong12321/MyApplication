@@ -7,7 +7,8 @@
         android:id="@+id/left_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left">
+        android:layout_gravity="left"
+        android:background="#789bbf">
         <!-- android:background="@drawable/msg_l" -->
 
         <TextView
@@ -23,7 +24,8 @@
         android:id="@+id/right_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right">
+        android:layout_gravity="right"
+        android:background="#f3f3f3">
         <!-- android:background="@drawable/msg_r" -->
 
         <TextView
