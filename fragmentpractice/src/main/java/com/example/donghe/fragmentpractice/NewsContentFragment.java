@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -28,5 +29,10 @@ public class NewsContentFragment extends Fragment {
         TextView newsContentText = (TextView) view.findViewById(R.id.news_content);
         newsTitleText.setText(newsTitle);
         newsContentText.setText(newsContent);
+    }
+    
+    public void hideLeftPic() {
+        ImageView imageView = (ImageView)view.findViewById(R.id.content_left_pid);
+        imageView.setVisibility(View.GONE);
     }
 }

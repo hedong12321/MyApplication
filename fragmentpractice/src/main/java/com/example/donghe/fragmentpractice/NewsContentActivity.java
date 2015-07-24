@@ -26,6 +26,7 @@ public class NewsContentActivity extends Activity {
         String n_content = getIntent().getStringExtra("n_content");
 
         NewsContentFragment fragment = (NewsContentFragment)getFragmentManager().findFragmentById(R.id.news_content_fragment);
+        fragment.hideLeftPic();
         fragment.refresh(n_title, n_content);
     }
 }
