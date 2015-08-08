@@ -1,1 +1,1 @@
-include ':uiwidget', ':app', ':fragmentpractice', ':coolweather'
+include ':uiwidget', ':app', ':fragmentpractice', ':coolweather', ':dongdong_weather'

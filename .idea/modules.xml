@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/MyApplication.iml" filepath="$PROJECT_DIR$/MyApplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/coolweather/coolweather.iml" filepath="$PROJECT_DIR$/coolweather/coolweather.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dongdong_weather/dongdong_weather.iml" filepath="$PROJECT_DIR$/dongdong_weather/dongdong_weather.iml" />
       <module fileurl="file://$PROJECT_DIR$/fragmentpractice/fragmentpractice.iml" filepath="$PROJECT_DIR$/fragmentpractice/fragmentpractice.iml" />
       <module fileurl="file://$PROJECT_DIR$/uiwidget/uiwidget.iml" filepath="$PROJECT_DIR$/uiwidget/uiwidget.iml" />
     </modules>
