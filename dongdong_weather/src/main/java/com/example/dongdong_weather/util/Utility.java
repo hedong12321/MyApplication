@@ -10,6 +10,7 @@ import com.example.dongdong_weather.R;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,7 +24,7 @@ import java.util.Locale;
  */
 public class Utility {
 
-    private final int BUFFER_SIZE = 1024;
+    private static final int BUFFER_SIZE = 1024;
     private static final String DB_NAME = "dongdong_weather.db"; //保存的数据库文件名
     private static final String PACKAGE_NAME = "com.example.dongdong_weather";//包名
     private static final String DB_PATH = "/data"
@@ -31,27 +32,44 @@ public class Utility {
             + PACKAGE_NAME;  //在手机里存放数据库的位置
 
     /**
-     * 首次运行初始化数据库（从资源中复制到应用默认目录）
+     * 判断是否已初始化数据库
      */
-    public boolean initAreaCodeData (Context context) {
-        try {
-            InputStream is = context.getResources().openRawResource(R.raw.dongdong_weather); //欲导入的数据库
-            FileOutputStream fos = new FileOutputStream(DB_PATH + "/" + DB_NAME);
-            byte[] buffer = new byte[BUFFER_SIZE];
-            int count = 0;
-            while ((count = is.read(buffer)) > 0) {
-                fos.write(buffer, 0, count);
-            }
-            fos.close();
-            is.close();
-
+    public static boolean checkExists () {
+        if (new File(DB_PATH + "/" + DB_NAME).exists()) {
             return true;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return false;
+    }
+
+    /**
+     * 首次运行初始化数据库（从资源中复制到应用默认目录）
+     */
+    public static void initAreaCodeData (final Context context, final HttpCallbackListener listener) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    InputStream is = context.getResources().openRawResource(R.raw.dongdong_weather); //欲导入的数据库
+                    FileOutputStream fos = new FileOutputStream(DB_PATH + "/" + DB_NAME);
+                    byte[] buffer = new byte[BUFFER_SIZE];
+                    int count = 0;
+                    while ((count = is.read(buffer)) > 0) {
+                        fos.write(buffer, 0, count);
+                    }
+                    fos.close();
+                    is.close();
+                    if (listener != null) {
+                        // 回调onFinish()方法
+                        listener.onFinish("初始化完成！");
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     /**
