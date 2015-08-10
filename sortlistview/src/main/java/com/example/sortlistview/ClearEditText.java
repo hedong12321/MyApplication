@@ -33,8 +33,7 @@ public class ClearEditText extends EditText implements
         super(context, attrs, defStyle);
         init();
     }
-    
-    
+
     private void init() {
         //获取EditText的DrawableRight,假如没有设置我们就使用默认的图片
     	mClearDrawable = getCompoundDrawables()[2]; 
@@ -49,7 +48,6 @@ public class ClearEditText extends EditText implements
         //设置输入框里面内容发生改变的监听
         addTextChangedListener(this); 
     }
-
 
     /**
      * 因为我们不能直接给EditText设置点击事件，所以我们用记住我们按下的位置来模拟点击事件
@@ -84,7 +82,6 @@ public class ClearEditText extends EditText implements
         } 
     }
 
-
     /**
      * 设置清除图标的显示与隐藏，调用setCompoundDrawables为EditText绘制上去
      * @param visible
@@ -94,7 +91,6 @@ public class ClearEditText extends EditText implements
         setCompoundDrawables(getCompoundDrawables()[0], 
                 getCompoundDrawables()[1], right, getCompoundDrawables()[3]); 
     }
-
 
     /**
      * 当输入框里面内容发生变化的时候回调的方法
@@ -116,14 +112,12 @@ public class ClearEditText extends EditText implements
          
     }
 
-
     /**
      * 设置晃动动画
      */
     public void setShakeAnimation(){
     	this.setAnimation(shakeAnimation(5));
     }
-
 
     /**
      * 晃动动画
