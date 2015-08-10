@@ -29,7 +29,7 @@ public class Utility {
     private static final String PACKAGE_NAME = "com.example.dongdong_weather";//包名
     private static final String DB_PATH = "/data"
             + Environment.getDataDirectory().getAbsolutePath() + "/"
-            + PACKAGE_NAME;  //在手机里存放数据库的位置
+            + PACKAGE_NAME + "/databases";  //在手机里存放数据库的位置
 
     /**
      * 判断是否已初始化数据库
@@ -50,6 +50,11 @@ public class Utility {
             @Override
             public void run() {
                 try {
+                    File dir = new File(DB_PATH);
+                    if (!dir.exists()) {
+                        dir.mkdir();
+                    }
+
                     InputStream is = context.getResources().openRawResource(R.raw.dongdong_weather); //欲导入的数据库
                     FileOutputStream fos = new FileOutputStream(DB_PATH + "/" + DB_NAME);
                     byte[] buffer = new byte[BUFFER_SIZE];
@@ -64,9 +69,15 @@ public class Utility {
                         listener.onFinish("初始化完成！");
                     }
                 } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                    if (listener != null) {
+                        // 回调onError()方法
+                        listener.onError(e);
+                    }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    if (listener != null) {
+                        // 回调onError()方法
+                        listener.onError(e);
+                    }
                 }
             }
         }).start();

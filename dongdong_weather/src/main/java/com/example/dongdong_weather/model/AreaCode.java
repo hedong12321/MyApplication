@@ -16,6 +16,8 @@ public class AreaCode {
     private String nationEn;
     private String nationZh;
 
+    private String sortLetters;
+
     public int getPkId() {
         return pkId;
     }
@@ -94,5 +96,13 @@ public class AreaCode {
 
     public void setNationZh(String nationZh) {
         this.nationZh = nationZh;
+    }
+
+    public String getSortLetters() {
+        return sortLetters;
+    }
+
+    public void setSortLetters(String sortLetters) {
+        this.sortLetters = sortLetters;
     }
 }
