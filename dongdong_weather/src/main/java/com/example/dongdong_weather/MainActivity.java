@@ -2,6 +2,7 @@ package com.example.dongdong_weather;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dongdong_weather.activity.WeatherActivity;
 import com.example.dongdong_weather.custom.ClearEditText;
 import com.example.dongdong_weather.custom.PinyinComparator;
 import com.example.dongdong_weather.custom.SideBar;
@@ -129,9 +131,12 @@ public class MainActivity extends Activity  {
         sortListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Toast.makeText(getApplication(), ((AreaCode)adapter.getItem(position)).getNameZh(), Toast.LENGTH_SHORT).show();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(getApplication(), ((AreaCode)adapter.getItem(position)).getNameZh(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, WeatherActivity.class);
+                intent.putExtra("county_code", ((AreaCode)adapter.getItem(position)).getAreaId());
+                startActivity(intent);
+                finish();
             }
         });
 

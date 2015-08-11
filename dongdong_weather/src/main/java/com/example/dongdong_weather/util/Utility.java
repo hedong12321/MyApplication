@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.dongdong_weather.R;
+import com.example.dongdong_weather.model.AreaExtInfo;
+import com.example.dongdong_weather.model.WeatherHistory;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -16,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -84,42 +89,82 @@ public class Utility {
     }
 
     /**
-     * 解析服务器返回的JSON数据，并将解析出的数据存储到本地。
+     * 解析服务器返回的JSON数据，并将解析出的数据存储到数据库
      */
     public static void handleWeatherResponse(Context context, String response) {
         try {
             JSONObject jsonObject = new JSONObject(response);
-            JSONObject weatherInfo = jsonObject.getJSONObject("weatherinfo");
+            JSONObject weatherInfo = jsonObject.getJSONObject("c");
 
-            String cityName = weatherInfo.getString("city");
-            String weatherCode = weatherInfo.getString("cityid");
-            String temp1 = weatherInfo.getString("temp1");
-            String temp2 = weatherInfo.getString("temp2");
-            String weatherDesp = weatherInfo.getString("weather");
-            String publishTime = weatherInfo.getString("ptime");
+            AreaExtInfo extInfo = new AreaExtInfo();
+            int areaId = Integer.valueOf(weatherInfo.getString("c1"));
+            extInfo.setAreaId(areaId);
+            extInfo.setCityOrder(Integer.valueOf(weatherInfo.getString("c10")));
+            extInfo.setCityAreaCode(weatherInfo.getString("c11"));
+            extInfo.setPostcode(weatherInfo.getString("c12"));
+            extInfo.setLatitude(Float.valueOf(weatherInfo.getString("c13")));
+            extInfo.setLongitude(Float.valueOf(weatherInfo.getString("c14")));
+            extInfo.setAltitude(Float.valueOf(weatherInfo.getString("c15")));
+            extInfo.setRadarNo(weatherInfo.getString("c16"));
+            extInfo.setTimeZone(weatherInfo.getString("c17"));
 
-            saveWeatherInfo(context, cityName, weatherCode, temp1, temp2, weatherDesp, publishTime);
+            JSONObject weather = jsonObject.getJSONObject("f");
+
+            String publishTime = weather.getString("f0");
+
+            JSONArray weatherArr = weather.getJSONArray("f1");
+            WeatherHistory[] histories = new WeatherHistory[weatherArr.length()];
+            WeatherHistory his = null;
+
+            // 处理日期
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
+            for (int i = 0; i < weatherArr.length(); i++) {
+                JSONObject info = weatherArr.getJSONObject(i);
+
+                his = new WeatherHistory();
+                his.setAreaId(areaId);
+                calendar.add(Calendar.DATE, i);
+                his.setForecastDate(sdf.format(calendar.getTime()));
+                if (!TextUtils.isEmpty(info.getString("fa"))) {
+                    his.setDayWeatherNo(Integer.valueOf(info.getString("fa")));
+                }
+                if (!TextUtils.isEmpty(info.getString("fb"))) {
+                    his.setNightWeatherNo(Integer.valueOf(info.getString("fb")));
+                }
+                if (!TextUtils.isEmpty(info.getString("fc"))) {
+                    his.setDayTemperature(Integer.valueOf(info.getString("fc")));
+                }
+                if (!TextUtils.isEmpty(info.getString("fd"))) {
+                    his.setNightTemperature(Integer.valueOf(info.getString("fd")));
+                }
+                if (!TextUtils.isEmpty(info.getString("fe"))) {
+                    his.setDayWindDirNo(Integer.valueOf(info.getString("fe")));
+                }
+                if (!TextUtils.isEmpty(info.getString("ff"))) {
+                    his.setNightWindDirNo(Integer.valueOf(info.getString("ff")));
+                }
+                if (!TextUtils.isEmpty(info.getString("fg"))) {
+                    his.setDayWindForceNo(Integer.valueOf(info.getString("fg")));
+                }
+                if (!TextUtils.isEmpty(info.getString("fh"))) {
+                    his.setNightWindForceNo(Integer.valueOf(info.getString("fh")));
+                }
+                his.setSunriseSunset(info.getString("fi"));
+                his.setPublishTime(publishTime);
+
+                histories[i] = his;
+            }
+
+            // 调用数据库方法判断是否存在，进行插入或更新
+
+
+            // 数据库更新后保存已选城市的areaId到SharedPreferences，用以启动程序事判断
+            // 该进入哪一个activity，判断则在MainActivity中进行
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * 将服务器返回的所有天气信息存储到SharedPreferences文件中。
-     */
-    public static void saveWeatherInfo(Context context, String cityName, String weatherCode,
-                                       String temp1, String temp2, String weatherDesp, String publishTime) {
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy年M月d日", Locale.CHINA);
-        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        editor.putBoolean("city_selected", true);
-        editor.putString("city_name", cityName);
-        editor.putString("weather_code", weatherCode);
-        editor.putString("temp1", temp1);
-        editor.putString("temp2", temp2);
-        editor.putString("weather_desp", weatherDesp);
-        editor.putString("publish_time", publishTime);
-        editor.putString("current_date", format.format(new Date()));
-        editor.commit();
     }
 }

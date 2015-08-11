@@ -18,9 +18,9 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Title Text"
+        android:text=" "
         android:textColor="#fff"
-        android:textSize="24sp"/>
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/title_menu"
