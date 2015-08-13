@@ -5,24 +5,24 @@ package com.example.dongdong_weather.model;
  */
 public class WindForce {
 
-    private int pkId;
-    private int forceNo;
+    private Integer pkId;
+    private Integer forceNo;
     private String nameZh;
     private String nameEn;
 
-    public int getPkId() {
+    public Integer getPkId() {
         return pkId;
     }
 
-    public void setPkId(int pkId) {
+    public void setPkId(Integer pkId) {
         this.pkId = pkId;
     }
 
-    public int getForceNo() {
+    public Integer getForceNo() {
         return forceNo;
     }
 
-    public void setForceNo(int forceNo) {
+    public void setForceNo(Integer forceNo) {
         this.forceNo = forceNo;
     }
 

@@ -5,8 +5,8 @@ package com.example.dongdong_weather.model;
  */
 public class AreaCode {
 
-    private int pkId;
-    private int areaId;
+    private Integer pkId;
+    private Integer areaId;
     private String nameEn;
     private String nameZh;
     private String districtEn;
@@ -18,19 +18,19 @@ public class AreaCode {
 
     private String sortLetters;
 
-    public int getPkId() {
+    public Integer getPkId() {
         return pkId;
     }
 
-    public void setPkId(int pkId) {
+    public void setPkId(Integer pkId) {
         this.pkId = pkId;
     }
 
-    public int getAreaId() {
+    public Integer getAreaId() {
         return areaId;
     }
 
-    public void setAreaId(int areaId) {
+    public void setAreaId(Integer areaId) {
         this.areaId = areaId;
     }
 

@@ -10,6 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dongdong_weather.R;
+import com.example.dongdong_weather.db.WeatherDB;
+import com.example.dongdong_weather.model.AreaCode;
+import com.example.dongdong_weather.model.WeatherCode;
+import com.example.dongdong_weather.model.WeatherHistory;
 import com.example.dongdong_weather.util.Constant;
 import com.example.dongdong_weather.util.HttpCallbackListener;
 import com.example.dongdong_weather.util.HttpUtil;
@@ -18,6 +22,7 @@ import com.example.dongdong_weather.util.Utility;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by dong.he on 2015/7/30.
@@ -51,6 +56,8 @@ public class WeatherActivity extends Activity {
      */
     private TextView currentDateText;
 
+    int countyCode = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,14 +73,14 @@ public class WeatherActivity extends Activity {
         temp2Text = (TextView) findViewById(R.id.temp2);
         currentDateText = (TextView) findViewById(R.id.current_date);
 
-        int countyCode = getIntent().getIntExtra("county_code", 0);
+        countyCode = getIntent().getIntExtra("county_code", 0);
         // 有县级代号时就去查询天气
         if (countyCode > 0) {
             publishText.setText("更新中...");
             weatherInfoLayout.setVisibility(View.GONE);
             cityNameText.setVisibility(View.GONE);
             queryWeatherFromServer(countyCode);
-        } else { // 没有县级代号时就直接显示本地天气
+        } else { // 没有城市代号时就直接查询天气历史
             showWeather();
         }
     }
@@ -126,15 +133,34 @@ public class WeatherActivity extends Activity {
      * 从SharedPreferences文件中读取存储的天气信息，并显示到界面上。
      */
     private void showWeather() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        cityNameText.setText(prefs.getString("city_name", ""));
-        temp1Text.setText(prefs.getString("temp1", ""));
-        temp2Text.setText(prefs.getString("temp2", ""));
-        weatherDespText.setText(prefs.getString("weather_desp", ""));
-        publishText.setText("今天" + prefs.getString("publish_time", "") + "发布");
-        currentDateText.setText(prefs.getString("current_date", ""));
-        weatherInfoLayout.setVisibility(View.VISIBLE);
-        cityNameText.setVisibility(View.VISIBLE);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年M月d日", Locale.CHINA);
+        String today = sdf.format(new Date());
+
+        WeatherDB db = WeatherDB.getInstance(this);
+        int code = countyCode;
+        if (code <= 0) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            code = Integer.valueOf(prefs.getString("preferenceCity", ""));
+        }
+        WeatherHistory history = db.getWeatherHistoryByAreaIdAndDate(String.valueOf(code), today);
+        if (history != null) {
+            AreaCode areaCode = db.getCityByAreaId(String.valueOf(code));
+            WeatherCode weatherCode = db.getWeatherCodeByWeatherNo(String.valueOf(history.getDayWeatherNo()));
+
+            cityNameText.setText(areaCode.getNameZh());
+            temp1Text.setText(history.getDayTemperature() != null ? history.getDayTemperature().toString() : "0");
+            temp2Text.setText(history.getNightTemperature() != null ? history.getNightTemperature().toString() : "0");
+            weatherDespText.setText(weatherCode.getNameZh());
+            publishText.setText("今天" + history.getPublishTime() + "发布");
+            currentDateText.setText(format.format(new Date()));
+            weatherInfoLayout.setVisibility(View.VISIBLE);
+            cityNameText.setVisibility(View.VISIBLE);
+        }
+        else {
+            queryWeatherFromServer(code);
+        }
 
         //Intent intent = new Intent(this, AutoUpdateService.class);
         //startService(intent);

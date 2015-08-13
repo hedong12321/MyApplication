@@ -5,38 +5,38 @@ package com.example.dongdong_weather.model;
  */
 public class AreaExtInfo {
 
-    private int pkId;
-    private int areaId;
-    private int cityOrder;
+    private Integer pkId;
+    private Integer areaId;
+    private Integer cityOrder;
     private String cityAreaCode;
     private String postcode;
-    private float latitude;
-    private float longitude;
-    private float altitude;
+    private Float latitude;
+    private Float longitude;
+    private Float altitude;
     private String radarNo;
     private String timeZone;
 
-    public int getPkId() {
+    public Integer getPkId() {
         return pkId;
     }
 
-    public void setPkId(int pkId) {
+    public void setPkId(Integer pkId) {
         this.pkId = pkId;
     }
 
-    public int getAreaId() {
+    public Integer getAreaId() {
         return areaId;
     }
 
-    public void setAreaId(int areaId) {
+    public void setAreaId(Integer areaId) {
         this.areaId = areaId;
     }
 
-    public int getCityOrder() {
+    public Integer getCityOrder() {
         return cityOrder;
     }
 
-    public void setCityOrder(int cityOrder) {
+    public void setCityOrder(Integer cityOrder) {
         this.cityOrder = cityOrder;
     }
 
@@ -48,27 +48,27 @@ public class AreaExtInfo {
         this.cityAreaCode = cityAreaCode;
     }
 
-    public float getLatitude() {
+    public Float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public Float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
 
-    public float getAltitude() {
+    public Float getAltitude() {
         return altitude;
     }
 
-    public void setAltitude(float altitude) {
+    public void setAltitude(Float altitude) {
         this.altitude = altitude;
     }
 

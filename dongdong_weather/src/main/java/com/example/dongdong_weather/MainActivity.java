@@ -3,7 +3,9 @@ package com.example.dongdong_weather;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -43,9 +45,26 @@ public class MainActivity extends Activity  {
 
     private WeatherDB weatherDB;
 
+    /**
+     * 是否从WeatherActivity中跳转过来。
+     */
+    private boolean isFromWeatherActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        isFromWeatherActivity = getIntent().getBooleanExtra("from_weather_activity", false);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        // 已经选择了城市且不是从WeatherActivity跳转过来，才会直接跳转到WeatherActivity
+        if (!TextUtils.isEmpty(prefs.getString("preferenceCity", "")) && !isFromWeatherActivity) {
+            Intent intent = new Intent(MainActivity.this, WeatherActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 

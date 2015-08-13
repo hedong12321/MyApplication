@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.dongdong_weather.R;
+import com.example.dongdong_weather.db.WeatherDB;
 import com.example.dongdong_weather.model.AreaExtInfo;
 import com.example.dongdong_weather.model.WeatherHistory;
 
@@ -158,11 +159,34 @@ public class Utility {
             }
 
             // 调用数据库方法判断是否存在，进行插入或更新
+            if (weatherInfo != null) {
+                WeatherDB db = WeatherDB.getInstance(context);
+                if (db.getAreaExtInfoByAreaId(String.valueOf(extInfo.getAreaId())) != null) {
+                    db.updateAreaExtInfo(extInfo);
+                }
+                else {
+                    db.addAreaExtInfo(extInfo);
+                }
 
+                for (WeatherHistory h : histories) {
+                    if (db.getWeatherHistoryByAreaIdAndDate(String.valueOf(h.getAreaId()), h.getForecastDate()) != null) {
+                        db.updateWeatherHistory(h);
+                    }
+                    else {
+                        db.saveWeatherHistory(h);
+                    }
+                }
+            }
 
-            // 数据库更新后保存已选城市的areaId到SharedPreferences，用以启动程序事判断
+            // 数据库更新后保存已选城市的areaId到SharedPreferences，用以启动程序时判断
             // 该进入哪一个activity，判断则在MainActivity中进行
-
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            // 如果没有添加首先城市就添加当前城市为首先城市
+            if (TextUtils.isEmpty(prefs.getString("preferenceCity", ""))) {
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("preferenceCity", String.valueOf(areaId));
+                editor.commit();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
