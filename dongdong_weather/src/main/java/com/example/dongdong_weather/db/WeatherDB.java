@@ -219,14 +219,30 @@ public class WeatherDB {
         ContentValues values = new ContentValues();
         //values.put("area_id", history.getAreaId());
         //values.put("forecast_date", history.getForecastDate());
-        values.put("day_weather_no", history.getDayWeatherNo());
-        values.put("night_weather_no", history.getNightWeatherNo());
-        values.put("day_temperature", history.getDayTemperature());
-        values.put("night_temperature", history.getNightTemperature());
-        values.put("day_wind_dir_no", history.getDayWindDirNo());
-        values.put("night_wind_dir_no", history.getNightWindDirNo());
-        values.put("day_wind_force_no", history.getDayWindForceNo());
-        values.put("night_wind_force_no", history.getNightWindForceNo());
+        if (history.getDayWeatherNo() != null) {
+            values.put("day_weather_no", history.getDayWeatherNo());
+        }
+        if (history.getNightWeatherNo() != null) {
+            values.put("night_weather_no", history.getNightWeatherNo());
+        }
+        if (history.getDayTemperature() != null) {
+            values.put("day_temperature", history.getDayTemperature());
+        }
+        if (history.getNightTemperature() != null) {
+            values.put("night_temperature", history.getNightTemperature());
+        }
+        if (history.getDayWindDirNo() != null) {
+            values.put("day_wind_dir_no", history.getDayWindDirNo());
+        }
+        if (history.getNightWindDirNo() != null) {
+            values.put("night_wind_dir_no", history.getNightWindDirNo());
+        }
+        if (history.getDayWindForceNo() != null) {
+            values.put("day_wind_force_no", history.getDayWindForceNo());
+        }
+        if (history.getNightWindForceNo() != null) {
+            values.put("night_wind_force_no", history.getNightWindForceNo());
+        }
         values.put("sunrise_sunset", history.getSunriseSunset());
         values.put("publish_time", history.getPublishTime());
 

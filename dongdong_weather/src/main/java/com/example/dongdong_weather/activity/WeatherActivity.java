@@ -1,14 +1,17 @@
 package com.example.dongdong_weather.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.dongdong_weather.MainActivity;
 import com.example.dongdong_weather.R;
 import com.example.dongdong_weather.db.WeatherDB;
 import com.example.dongdong_weather.model.AreaCode;
@@ -58,6 +61,11 @@ public class WeatherActivity extends Activity {
 
     int countyCode = 0;
 
+    /**
+     * 菜单按钮
+     */
+    private Button titleMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +80,7 @@ public class WeatherActivity extends Activity {
         temp1Text = (TextView) findViewById(R.id.temp1);
         temp2Text = (TextView) findViewById(R.id.temp2);
         currentDateText = (TextView) findViewById(R.id.current_date);
+        titleMenu = (Button) findViewById(R.id.title_menu);
 
         countyCode = getIntent().getIntExtra("county_code", 0);
         // 有县级代号时就去查询天气
@@ -83,6 +92,18 @@ public class WeatherActivity extends Activity {
         } else { // 没有城市代号时就直接查询天气历史
             showWeather();
         }
+
+        titleMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == R.id.title_menu) {
+                    Intent intent = new Intent(WeatherActivity.this, MainActivity.class);
+                    intent.putExtra("from_weather_activity", true);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
     }
 
     /**

@@ -126,7 +126,6 @@ public class Utility {
 
                 his = new WeatherHistory();
                 his.setAreaId(areaId);
-                calendar.add(Calendar.DATE, i);
                 his.setForecastDate(sdf.format(calendar.getTime()));
                 if (!TextUtils.isEmpty(info.getString("fa"))) {
                     his.setDayWeatherNo(Integer.valueOf(info.getString("fa")));
@@ -156,6 +155,7 @@ public class Utility {
                 his.setPublishTime(publishTime);
 
                 histories[i] = his;
+                calendar.add(Calendar.DATE, 1);
             }
 
             // 调用数据库方法判断是否存在，进行插入或更新
