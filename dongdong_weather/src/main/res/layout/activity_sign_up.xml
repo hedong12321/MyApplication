@@ -1,0 +1,139 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.dongdong_weather.SignUpActivity"
+    android:orientation="vertical" >
+
+    <!-- 
+    <CheckedTextView 
+        android:text="开启定时更新"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:checkMark="@drawable/setting_arrow" />
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="hello"
+        android:password="true"/>
+    
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="date" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入你的的电话号码"
+        android:selectAllOnFocus="true"
+        android:inputType="phone" />
+    
+    <RadioGroup
+        android:id="@+id/rg"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+        <RadioButton
+            android:id="@+id/male"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:checked="true"
+        	android:text="男" />
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="女" />
+    </RadioGroup>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        
+        <CheckBox
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:checked="true"
+	        android:text="蓝色" />
+	    
+	    <CheckBox
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="绿色" />
+    </LinearLayout>
+    
+    <ToggleButton
+        android:id="@+id/tb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textOff="off"
+        android:textOn="on" />
+    
+    <Switch
+        android:id="@+id/sw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textOff="off"
+        android:textOn="on" />
+    
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/books"
+        android:prompt="@string/spinner_prompt" />
+     -->
+    
+    <!-- 
+    <CalendarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:firstDayOfWeek="7"
+        android:shownWeekCount="4"
+        android:selectedWeekBackgroundColor="#aff"
+        android:focusedMonthDateColor="#f00"
+        android:weekSeparatorLineColor="#ff0"
+        android:unfocusedMonthDateColor="#f9f" />
+     -->
+    
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:startYear="2015"
+        android:endYear="2020"
+        android:calendarViewShown="false"
+        android:spinnersShown="false" />
+    
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="100dp" />
+    
+    <NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+    
+    <SearchView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search1" />
+    <SearchView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="true"
+        android:queryHint="Search2" />
+    
+    
+</LinearLayout>
