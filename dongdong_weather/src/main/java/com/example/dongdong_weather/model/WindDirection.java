@@ -6,7 +6,7 @@ package com.example.dongdong_weather.model;
 public class WindDirection {
 
     private Integer pkId;
-    private Integer directionNo;
+    private String directionNo;
     private String nameZh;
     private String nameEn;
 
@@ -18,11 +18,11 @@ public class WindDirection {
         this.pkId = pkId;
     }
 
-    public Integer getDirectionNo() {
+    public String getDirectionNo() {
         return directionNo;
     }
 
-    public void setDirectionNo(Integer directionNo) {
+    public void setDirectionNo(String directionNo) {
         this.directionNo = directionNo;
     }
 

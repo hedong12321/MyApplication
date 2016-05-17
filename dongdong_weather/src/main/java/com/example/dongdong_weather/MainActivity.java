@@ -1,5 +1,9 @@
 package com.example.dongdong_weather;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -16,22 +20,24 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dongdong_weather.activity.SettingActivity;
+import com.example.dongdong_weather.activity.SignUpActivity;
 import com.example.dongdong_weather.activity.WeatherActivity;
 import com.example.dongdong_weather.custom.ClearEditText;
 import com.example.dongdong_weather.custom.PinyinComparator;
 import com.example.dongdong_weather.custom.SideBar;
+import com.example.dongdong_weather.custom.SlidingMenu;
 import com.example.dongdong_weather.custom.SortAdapter;
+import com.example.dongdong_weather.custom.TitleBuilder;
 import com.example.dongdong_weather.db.WeatherDB;
 import com.example.dongdong_weather.model.AreaCode;
 import com.example.dongdong_weather.util.HttpCallbackListener;
 import com.example.dongdong_weather.util.Utility;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class MainActivity extends Activity  {
 
+	/* 滑动菜单 */
+	private SlidingMenu mMenu;
     private ProgressDialog progressDialog;
 
     private ListView sortListView;
@@ -44,6 +50,11 @@ public class MainActivity extends Activity  {
     private PinyinComparator pinyinComparator;
 
     private WeatherDB weatherDB;
+    
+    /* 设置 */
+    private TextView appSetting;
+    /* 注册 */
+    private View rl;
 
     /**
      * 是否从WeatherActivity中跳转过来。
@@ -67,6 +78,12 @@ public class MainActivity extends Activity  {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        
+        /**
+         * 初始化标题
+         */
+        initTitle();
+        mMenu = (SlidingMenu) findViewById(R.id.id_menu);
 
         if (!Utility.checkExists()) {
             //Toast.makeText(MainActivity.this, Environment.getDataDirectory().getAbsolutePath(), Toast.LENGTH_LONG);
@@ -76,7 +93,55 @@ public class MainActivity extends Activity  {
             initViews();
         }
     }
+    
+    private void initTitle() {
+        /**
+         * 1.设置左边的图片按钮显示，以及事件
+         * 2.设置中间TextView显示的文字
+         * 3.设置右边的图片按钮显示，并设置事件
+         */
+    	TitleBuilder title = new TitleBuilder(this).setMiddleTitleText("城市选择")
+    			.setLeftImageRes(R.drawable.layout_right_menu)
+    			.setLeftTextOrImageListener(leftCilckListener);
+    	
+    	if (isFromWeatherActivity) {
+    		title.setRightText("返回").setRightTextOrImageListener(rightCilckListener);
+    	}
 
+    }
+    
+    private View.OnClickListener leftCilckListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            /**
+             * 也可根据上面的配置进行监听 此处做演示使用
+             */
+            if (v.getId() == R.id.title_left_imageview) {
+                /**
+                 * 左边图片点击动作-打开或关闭滑动菜单
+                 */
+            	mMenu.toggle();
+            }
+        }
+    };
+    private View.OnClickListener rightCilckListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            if (v.getId() == R.id.title_right_textview) {
+                /**
+                 * 右边文字点击动作-返回
+                 */
+            	Intent intent = new Intent(MainActivity.this, WeatherActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+    };
+    
+    /**
+     * 复制数据库模板，显示进度条，复制成功后显示主Activity
+     */
     private void initAreaCodeData() {
         showProgressDialog();
         Utility.initAreaCodeData(this, new HttpCallbackListener() {
@@ -183,6 +248,25 @@ public class MainActivity extends Activity  {
             public void afterTextChanged(Editable s) {
             }
         });
+        
+        appSetting = (TextView) findViewById(R.id.app_setting);
+        appSetting.setOnClickListener(new View.OnClickListener() {
+	        @Override
+	        public void onClick(View v) {
+	        	Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(intent);
+                //finish();
+	        }
+	    });
+        rl = findViewById(R.id.menu_sign_up);
+        rl.setOnClickListener(new View.OnClickListener() {
+	        @Override
+	        public void onClick(View v) {
+	        	Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(intent);
+                //finish();
+	        }
+	    });
     }
 
     private void filterData(String filterStr){

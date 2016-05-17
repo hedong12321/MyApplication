@@ -6,16 +6,16 @@ package com.example.dongdong_weather.model;
 public class WeatherHistory {
 
     private Integer pkId;
-    private Integer areaId;
+    private String areaId;
     private String forecastDate;
-    private Integer dayWeatherNo;
-    private Integer nightWeatherNo;
-    private Integer dayTemperature;
-    private Integer nightTemperature;
-    private Integer dayWindDirNo;
-    private Integer nightWindDirNo;
-    private Integer dayWindForceNo;
-    private Integer nightWindForceNo;
+    private String dayWeatherNo;
+    private String nightWeatherNo;
+    private String dayTemperature;
+    private String nightTemperature;
+    private String dayWindDirNo;
+    private String nightWindDirNo;
+    private String dayWindForceNo;
+    private String nightWindForceNo;
     private String sunriseSunset;
     private String publishTime;
 
@@ -27,11 +27,11 @@ public class WeatherHistory {
         this.pkId = pkId;
     }
 
-    public Integer getAreaId() {
+    public String getAreaId() {
         return areaId;
     }
 
-    public void setAreaId(Integer areaId) {
+    public void setAreaId(String areaId) {
         this.areaId = areaId;
     }
 
@@ -41,70 +41,6 @@ public class WeatherHistory {
 
     public void setForecastDate(String forecastDate) {
         this.forecastDate = forecastDate;
-    }
-
-    public Integer getDayWeatherNo() {
-        return dayWeatherNo;
-    }
-
-    public void setDayWeatherNo(Integer dayWeatherNo) {
-        this.dayWeatherNo = dayWeatherNo;
-    }
-
-    public Integer getNightWeatherNo() {
-        return nightWeatherNo;
-    }
-
-    public void setNightWeatherNo(Integer nightWeatherNo) {
-        this.nightWeatherNo = nightWeatherNo;
-    }
-
-    public Integer getDayTemperature() {
-        return dayTemperature;
-    }
-
-    public void setDayTemperature(Integer dayTemperature) {
-        this.dayTemperature = dayTemperature;
-    }
-
-    public Integer getNightTemperature() {
-        return nightTemperature;
-    }
-
-    public void setNightTemperature(Integer nightTemperature) {
-        this.nightTemperature = nightTemperature;
-    }
-
-    public Integer getDayWindDirNo() {
-        return dayWindDirNo;
-    }
-
-    public void setDayWindDirNo(Integer dayWindDirNo) {
-        this.dayWindDirNo = dayWindDirNo;
-    }
-
-    public Integer getNightWindDirNo() {
-        return nightWindDirNo;
-    }
-
-    public void setNightWindDirNo(Integer nightWindDirNo) {
-        this.nightWindDirNo = nightWindDirNo;
-    }
-
-    public Integer getDayWindForceNo() {
-        return dayWindForceNo;
-    }
-
-    public void setDayWindForceNo(Integer dayWindForceNo) {
-        this.dayWindForceNo = dayWindForceNo;
-    }
-
-    public Integer getNightWindForceNo() {
-        return nightWindForceNo;
-    }
-
-    public void setNightWindForceNo(Integer nightWindForceNo) {
-        this.nightWindForceNo = nightWindForceNo;
     }
 
     public String getSunriseSunset() {
@@ -122,4 +58,68 @@ public class WeatherHistory {
     public void setPublishTime(String publishTime) {
         this.publishTime = publishTime;
     }
+
+	public String getDayWeatherNo() {
+		return dayWeatherNo;
+	}
+
+	public void setDayWeatherNo(String dayWeatherNo) {
+		this.dayWeatherNo = dayWeatherNo;
+	}
+
+	public String getNightWeatherNo() {
+		return nightWeatherNo;
+	}
+
+	public void setNightWeatherNo(String nightWeatherNo) {
+		this.nightWeatherNo = nightWeatherNo;
+	}
+
+	public String getDayTemperature() {
+		return dayTemperature;
+	}
+
+	public void setDayTemperature(String dayTemperature) {
+		this.dayTemperature = dayTemperature;
+	}
+
+	public String getNightTemperature() {
+		return nightTemperature;
+	}
+
+	public void setNightTemperature(String nightTemperature) {
+		this.nightTemperature = nightTemperature;
+	}
+
+	public String getDayWindDirNo() {
+		return dayWindDirNo;
+	}
+
+	public void setDayWindDirNo(String dayWindDirNo) {
+		this.dayWindDirNo = dayWindDirNo;
+	}
+
+	public String getNightWindDirNo() {
+		return nightWindDirNo;
+	}
+
+	public void setNightWindDirNo(String nightWindDirNo) {
+		this.nightWindDirNo = nightWindDirNo;
+	}
+
+	public String getDayWindForceNo() {
+		return dayWindForceNo;
+	}
+
+	public void setDayWindForceNo(String dayWindForceNo) {
+		this.dayWindForceNo = dayWindForceNo;
+	}
+
+	public String getNightWindForceNo() {
+		return nightWindForceNo;
+	}
+
+	public void setNightWindForceNo(String nightWindForceNo) {
+		this.nightWindForceNo = nightWindForceNo;
+	}
 }

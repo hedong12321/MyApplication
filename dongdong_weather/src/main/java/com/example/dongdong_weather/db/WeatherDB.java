@@ -14,6 +14,7 @@ import com.example.dongdong_weather.model.WindForce;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by dong.he on 2015/7/29.
@@ -57,7 +58,7 @@ public class WeatherDB {
             do {
                 AreaCode areaCode = new AreaCode();
                 areaCode.setPkId(cursor.getInt(cursor.getColumnIndex("pk_id")));
-                areaCode.setAreaId(cursor.getInt(cursor.getColumnIndex("area_id")));
+                areaCode.setAreaId(cursor.getString(cursor.getColumnIndex("area_id")));
                 areaCode.setNameEn(cursor.getString(cursor.getColumnIndex("name_en")));
                 areaCode.setNameZh(cursor.getString(cursor.getColumnIndex("name_zh")));
                 areaCode.setDistrictEn(cursor.getString(cursor.getColumnIndex("district_en")));
@@ -66,7 +67,7 @@ public class WeatherDB {
                 areaCode.setProvZh(cursor.getString(cursor.getColumnIndex("prov_zh")));
                 areaCode.setNationEn(cursor.getString(cursor.getColumnIndex("nation_en")));
                 areaCode.setNationZh(cursor.getString(cursor.getColumnIndex("nation_zh")));
-                areaCode.setSortLetters(cursor.getString(cursor.getColumnIndex("name_en")).substring(0, 1).toUpperCase());
+                areaCode.setSortLetters(cursor.getString(cursor.getColumnIndex("name_en")).substring(0, 1).toUpperCase(Locale.US));
                 list.add(areaCode);
             } while (cursor.moveToNext());
         }
@@ -81,7 +82,7 @@ public class WeatherDB {
         if (cursor.moveToFirst()) {
             AreaCode areaCode = new AreaCode();
             areaCode.setPkId(cursor.getInt(cursor.getColumnIndex("pk_id")));
-            areaCode.setAreaId(cursor.getInt(cursor.getColumnIndex("area_id")));
+            areaCode.setAreaId(cursor.getString(cursor.getColumnIndex("area_id")));
             areaCode.setNameEn(cursor.getString(cursor.getColumnIndex("name_en")));
             areaCode.setNameZh(cursor.getString(cursor.getColumnIndex("name_zh")));
             areaCode.setDistrictEn(cursor.getString(cursor.getColumnIndex("district_en")));
@@ -90,7 +91,7 @@ public class WeatherDB {
             areaCode.setProvZh(cursor.getString(cursor.getColumnIndex("prov_zh")));
             areaCode.setNationEn(cursor.getString(cursor.getColumnIndex("nation_en")));
             areaCode.setNationZh(cursor.getString(cursor.getColumnIndex("nation_zh")));
-            areaCode.setSortLetters(cursor.getString(cursor.getColumnIndex("name_en")).substring(0, 1).toUpperCase());
+            areaCode.setSortLetters(cursor.getString(cursor.getColumnIndex("name_en")).substring(0, 1).toUpperCase(Locale.US));
 
             return areaCode;
         }
@@ -106,13 +107,13 @@ public class WeatherDB {
         if (cursor.moveToFirst()) {
             AreaExtInfo extInfo = new AreaExtInfo();
             extInfo.setPkId(cursor.getInt(cursor.getColumnIndex("pk_id")));
-            extInfo.setAreaId(cursor.getInt(cursor.getColumnIndex("area_id")));
+            extInfo.setAreaId(cursor.getString(cursor.getColumnIndex("area_id")));
             extInfo.setCityOrder(cursor.getInt(cursor.getColumnIndex("city_order")));
             extInfo.setCityAreaCode(cursor.getString(cursor.getColumnIndex("city_area_code")));
             extInfo.setPostcode(cursor.getString(cursor.getColumnIndex("postcode")));
-            extInfo.setLatitude(cursor.getFloat(cursor.getColumnIndex("latitude")));
-            extInfo.setLongitude(cursor.getFloat(cursor.getColumnIndex("longitude")));
-            extInfo.setAltitude(cursor.getFloat(cursor.getColumnIndex("altitude")));
+            extInfo.setLatitude(cursor.getString(cursor.getColumnIndex("latitude")));
+            extInfo.setLongitude(cursor.getString(cursor.getColumnIndex("longitude")));
+            extInfo.setAltitude(cursor.getString(cursor.getColumnIndex("altitude")));
             extInfo.setRadarNo(cursor.getString(cursor.getColumnIndex("radar_no")));
             extInfo.setTimeZone(cursor.getString(cursor.getColumnIndex("time_zone")));
 
@@ -170,16 +171,16 @@ public class WeatherDB {
         if (cursor.moveToFirst()) {
             WeatherHistory history = new WeatherHistory();
             history.setPkId(cursor.getInt(cursor.getColumnIndex("pk_id")));
-            history.setAreaId(cursor.getInt(cursor.getColumnIndex("area_id")));
+            history.setAreaId(cursor.getString(cursor.getColumnIndex("area_id")));
             history.setForecastDate(cursor.getString(cursor.getColumnIndex("forecast_date")));
-            history.setDayWeatherNo(cursor.getInt(cursor.getColumnIndex("day_weather_no")));
-            history.setNightWeatherNo(cursor.getInt(cursor.getColumnIndex("night_weather_no")));
-            history.setDayTemperature(cursor.getInt(cursor.getColumnIndex("day_temperature")));
-            history.setNightTemperature(cursor.getInt(cursor.getColumnIndex("night_temperature")));
-            history.setDayWindDirNo(cursor.getInt(cursor.getColumnIndex("day_wind_dir_no")));
-            history.setNightWindDirNo(cursor.getInt(cursor.getColumnIndex("night_wind_dir_no")));
-            history.setDayWindForceNo(cursor.getInt(cursor.getColumnIndex("day_wind_force_no")));
-            history.setNightWindForceNo(cursor.getInt(cursor.getColumnIndex("night_wind_force_no")));
+            history.setDayWeatherNo(cursor.getString(cursor.getColumnIndex("day_weather_no")));
+            history.setNightWeatherNo(cursor.getString(cursor.getColumnIndex("night_weather_no")));
+            history.setDayTemperature(cursor.getString(cursor.getColumnIndex("day_temperature")));
+            history.setNightTemperature(cursor.getString(cursor.getColumnIndex("night_temperature")));
+            history.setDayWindDirNo(cursor.getString(cursor.getColumnIndex("day_wind_dir_no")));
+            history.setNightWindDirNo(cursor.getString(cursor.getColumnIndex("night_wind_dir_no")));
+            history.setDayWindForceNo(cursor.getString(cursor.getColumnIndex("day_wind_force_no")));
+            history.setNightWindForceNo(cursor.getString(cursor.getColumnIndex("night_wind_force_no")));
             history.setSunriseSunset(cursor.getString(cursor.getColumnIndex("sunrise_sunset")));
             history.setPublishTime(cursor.getString(cursor.getColumnIndex("publish_time")));
 
@@ -258,7 +259,7 @@ public class WeatherDB {
         if (cursor.moveToFirst()) {
             WeatherCode weather = new WeatherCode();
             weather.setPkId(cursor.getInt(cursor.getColumnIndex("pk_id")));
-            weather.setWeatherNo(cursor.getInt(cursor.getColumnIndex("weather_no")));
+            weather.setWeatherNo(cursor.getString(cursor.getColumnIndex("weather_no")));
             weather.setNameZh(cursor.getString(cursor.getColumnIndex("name_zh")));
             weather.setNameEn(cursor.getString(cursor.getColumnIndex("name_en")));
 
@@ -275,7 +276,7 @@ public class WeatherDB {
         if (cursor.moveToFirst()) {
             WindDirection direction = new WindDirection();
             direction.setPkId(cursor.getInt(cursor.getColumnIndex("pk_id")));
-            direction.setDirectionNo(cursor.getInt(cursor.getColumnIndex("direction_no")));
+            direction.setDirectionNo(cursor.getString(cursor.getColumnIndex("direction_no")));
             direction.setNameZh(cursor.getString(cursor.getColumnIndex("name_zh")));
             direction.setNameEn(cursor.getString(cursor.getColumnIndex("name_en")));
 
@@ -292,7 +293,7 @@ public class WeatherDB {
         if (cursor.moveToFirst()) {
             WindForce force = new WindForce();
             force.setPkId(cursor.getInt(cursor.getColumnIndex("pk_id")));
-            force.setForceNo(cursor.getInt(cursor.getColumnIndex("force_no")));
+            force.setForceNo(cursor.getString(cursor.getColumnIndex("force_no")));
             force.setNameZh(cursor.getString(cursor.getColumnIndex("name_zh")));
             force.setNameEn(cursor.getString(cursor.getColumnIndex("name_en")));
 

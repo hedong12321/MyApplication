@@ -6,7 +6,7 @@ package com.example.dongdong_weather.model;
 public class WindForce {
 
     private Integer pkId;
-    private Integer forceNo;
+    private String forceNo;
     private String nameZh;
     private String nameEn;
 
@@ -18,11 +18,11 @@ public class WindForce {
         this.pkId = pkId;
     }
 
-    public Integer getForceNo() {
+    public String getForceNo() {
         return forceNo;
     }
 
-    public void setForceNo(Integer forceNo) {
+    public void setForceNo(String forceNo) {
         this.forceNo = forceNo;
     }
 

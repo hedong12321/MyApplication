@@ -1,5 +1,7 @@
 package com.example.dongdong_weather.custom;
 
+import java.util.Locale;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -51,8 +53,8 @@ public class SideBar extends View {
 			// paint.setColor(Color.WHITE);
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 			paint.setAntiAlias(true);
-			paint.setTextSize(20);
-			// ѡ�е�״̬
+			paint.setTextSize(20.0F);
+			
 			if (i == choose) {
 				paint.setColor(Color.parseColor("#3399ff"));
 				paint.setFakeBoldText(true);
@@ -62,7 +64,6 @@ public class SideBar extends View {
 			canvas.drawText(b[i], xPos, yPos, paint);
 			paint.reset();
 		}
-
 	}
 
 	@Override

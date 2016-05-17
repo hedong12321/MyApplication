@@ -6,13 +6,13 @@ package com.example.dongdong_weather.model;
 public class AreaExtInfo {
 
     private Integer pkId;
-    private Integer areaId;
+    private String areaId;
     private Integer cityOrder;
     private String cityAreaCode;
     private String postcode;
-    private Float latitude;
-    private Float longitude;
-    private Float altitude;
+    private String latitude;
+    private String longitude;
+    private String altitude;
     private String radarNo;
     private String timeZone;
 
@@ -24,11 +24,11 @@ public class AreaExtInfo {
         this.pkId = pkId;
     }
 
-    public Integer getAreaId() {
+    public String getAreaId() {
         return areaId;
     }
 
-    public void setAreaId(Integer areaId) {
+    public void setAreaId(String areaId) {
         this.areaId = areaId;
     }
 
@@ -48,27 +48,27 @@ public class AreaExtInfo {
         this.cityAreaCode = cityAreaCode;
     }
 
-    public Float getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Float latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public Float getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Float longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public Float getAltitude() {
+    public String getAltitude() {
         return altitude;
     }
 
-    public void setAltitude(Float altitude) {
+    public void setAltitude(String altitude) {
         this.altitude = altitude;
     }
 
